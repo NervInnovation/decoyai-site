@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decoy AI — Support</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #d946ef;
+      --purple: #7c3aed;
+      --purple-dark: #1a1040;
+      --purple-deeper: #0d0b1a;
+      --surface: #13102a;
+      --surface2: #1c1840;
+      --border: rgba(124, 58, 237, 0.25);
+      --border-pink: rgba(217, 70, 239, 0.35);
+      --text: #ffffff;
+      --text-secondary: #a89cc8;
+      --text-dim: #4a4568;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--purple-deeper);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 80px;
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(124,58,237,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(217,70,239,0.10) 0%, transparent 60%);
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1040 0%, #13102a 50%, #1c1840 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 52px 24px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(217,70,239,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .app-icon {
+      width: 88px;
+      height: 88px;
+      background: #000;
+      border-radius: 22px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--border-pink);
+      box-shadow: 0 0 24px rgba(217,70,239,0.2);
+      position: relative;
+    }
+
+    /* Offset squares logo */
+    .sq-back {
+      position: absolute;
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: #7c3aed;
+      top: 18px; left: 18px;
+    }
+    .sq-front {
+      position: absolute;
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: #000;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      top: 28px; left: 28px;
+    }
+
+    .app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(217,70,239,0.10);
+      border: 1px solid var(--border-pink);
+      border-radius: 99px;
+      padding: 5px 14px;
+      margin-bottom: 16px;
+    }
+
+    .app-badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 8px var(--pink);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .app-badge span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      text-transform: uppercase;
+    }
+
+    header h1 {
+      font-size: 30px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 15px;
+      color: var(--text-dim);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-top: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .section:hover {
+      border-color: rgba(124,58,237,0.45);
+    }
+
+    .section h2 {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--pink);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 14px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section h2::before {
+      content: '✦';
+      font-size: 8px;
+      color: var(--purple);
+    }
+
+    .section p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .section p + p { margin-top: 10px; }
+
+    .section strong { color: white; font-weight: 600; }
+
+    a {
+      color: var(--pink);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(217,70,239,0.10);
+      border: 1px solid var(--border-pink);
+      color: var(--pink);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 14px;
+      text-decoration: none;
+      transition: background 0.2s;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .email-btn:hover {
+      background: rgba(217,70,239,0.18);
+      text-decoration: none;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(124,58,237,0.2);
+      border: 1px solid rgba(124,58,237,0.4);
+      color: var(--pink);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .step p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .legal-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(124,58,237,0.15);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .legal-link:last-child { border-bottom: none; }
+
+    .legal-link:hover { opacity: 0.75; text-decoration: none; }
+
+    .legal-link span {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .legal-link .arrow {
+      color: var(--text-dim);
+      font-size: 16px;
+    }
+
+    .note {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      letter-spacing: 0.05em;
+    }
+
+    footer a { color: var(--text-dim); transition: color 0.2s; }
+    footer a:hover { color: var(--pink); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="app-icon">
+      <div class="sq-back"></div>
+      <div class="sq-front"></div>
+    </div>
+    <div class="app-badge">
+      <div class="app-badge-dot"></div>
+      <span>Decoy AI</span>
+    </div>
+    <h1>Support</h1>
+    <p>The AI tutor with a secret identity.</p>
+  </header>
+
+  <div class="container">
+
+    <div class="section">
+      <h2>Contact support</h2>
+      <p>Have a question, found a bug, or need help? We read every message and aim to respond within 24 hours.</p>
+      <a href="mailto:support.flashstacks@gmail.com" class="email-btn">
+        ✉ support.flashstacks@gmail.com
+      </a>
+    </div>
+
+    <div class="section">
+      <h2>How to solve a question</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <p>Open Decoy AI and tap the upload zone on the home screen</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p>Take a photo of your question or choose one from your library</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p>Tap <strong>Solve</strong> — your step-by-step explanation will appear in seconds</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <p>Tap any step and ask a <strong>follow-up question</strong> if you need more explanation</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>How to use Decoy Mode</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <p>Tap the <strong>🧮 Decoy Mode</strong> button on the solver screen</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p>The app instantly switches to a fully working calculator</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p>To return, enter your <strong>secret PIN</strong> into the calculator and tap <strong>=</strong></p>
+        </div>
+      </div>
+      <p class="note">Your PIN is set during onboarding. To change it, go to <strong>Settings → Security → Change PIN</strong>.</p>
+    </div>
+
+    <div class="section">
+      <h2>How to cancel your subscription</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <p>Open the <strong>Settings</strong> app on your iPhone</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p>Tap your <strong>Apple ID</strong> at the top → <strong>Subscriptions</strong></p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p>Tap <strong>Decoy AI</strong> → <strong>Cancel Subscription</strong></p>
+        </div>
+      </div>
+      <p class="note">Your Pro access continues until the end of the current billing period.</p>
+    </div>
+
+    <div class="section">
+      <h2>How to restore purchases</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <p>Open Decoy AI and go to <strong>Settings</strong> (gear icon)</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p>Tap <strong>Restore Purchases</strong> under the Account section</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p>Sign in with the Apple ID used for the original purchase if prompted</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Legal</h2>
+      <a href="index.html" class="legal-link">
+        <span>Privacy Policy</span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#" class="legal-link">
+        <span>Terms of Use</span>
+        <span class="arrow">›</span>
+      </a>
+    </div>
+
+    <footer>
+      <p>© 2026 Decoy AI. All rights reserved.</p>
+      <p style="margin-top:6px;"><a href="index.html">Privacy Policy</a> · <a href="mailto:support.flashstacks@gmail.com">Contact</a></p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
